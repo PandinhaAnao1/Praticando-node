@@ -4,7 +4,8 @@
   "description": "\"Praticando node\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/PandinhaAnao1/Praticando-node/issues"
   },
-  "homepage": "https://github.com/PandinhaAnao1/Praticando-node#readme"
+  "homepage": "https://github.com/PandinhaAnao1/Praticando-node#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
+  }
 }
