@@ -1,13 +1,26 @@
+//Importa o express
 import express from 'express'
+
+//Cria um instancia do express
 const app = express()
+
+//Porta
 const porta = 3000;
+
+//Busca modulo que conecta na base de dados
 import conectaNabaseDedados from './config/dbConnect.js';
+
+//Busca modelo Schema do banco
 import filme from './models/filme.js';
 
+//Midleware
 app.use(express.json());
+
+//Cria conecxão entre a api e o banco de dados
 const conexao = conectaNabaseDedados();
 
 
+//Busca todos os Filme 
 app.get('/',async(req,res)=>{
     try{
         const filmes = await filme.find();
@@ -17,6 +30,7 @@ app.get('/',async(req,res)=>{
     }
 });
 
+//Lista filme por id 
 app.get('/:id',async(res,req)=>{
     try{
         const indenficador = req.body.id;
@@ -34,6 +48,7 @@ app.get('/:id',async(res,req)=>{
     };
 });
 
+//Casdastra filme
 app.post('/', async(req,res)=>{
     try{
         const filmeAcadast = req.body;
@@ -51,6 +66,7 @@ app.post('/', async(req,res)=>{
 
 });
 
+//Atualizar Filme
 app.put('/',async(req,res)=>{
     try{
         const dados = req.body;
@@ -67,23 +83,20 @@ app.put('/',async(req,res)=>{
     };
 });
 
+//Deleta filme
 app.delete('/',async(req,res)=>{
-    try{
-        const corpo = req.body;
-        const deletado = await filme.deleteOne(corpo);
-        res.satus(200).json({
-            mensage:"Filme deletado com sucesso",
-            filme: dados
-    });
-    }catch(erro){
+    try{   
+        const ide = req.body._id; 
+        const autorDeletado = await filme.findByIdAndDelete(ide);
+        res.status(200).json({autorDeletado});
+    }catch (erro){
         res.status(500).json({
-            mensage:"Não foi possivel deletar o livro!!",
-            Erro:erro
-        });
-    };
+        mensage:`${erro.mensage} falha na requisição!`
+            });
+        }
 });
 
-
+//Disponibiliza o server
 app.listen(porta, ()=>{
     console.log('O servidor esta rodando na porta '+porta)
 });
