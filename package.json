@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -13,12 +13,15 @@
   },
   "author": "Altenir modesto gomes",
   "license": "ISC",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/PandinhaAnao1/Praticando-node/issues"
   },
   "homepage": "https://github.com/PandinhaAnao1/Praticando-node#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "mongodb": "^6.2.0",
+    "mongoose": "^7.6.3",
     "nodemon": "^3.0.1"
   }
 }
